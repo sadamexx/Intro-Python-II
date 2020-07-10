@@ -44,9 +44,9 @@ item = {
 }
 
 room['outside'].add_item(item["stick"])
-room['foyer'].item.append(item["candle"])
-room['overlook'].item.append(item["rope"])
-room['treasure'].item.append(item["note"])
+room['foyer'].add_item(item["candle"])
+room['overlook'].add_item(item["rope"])
+room['treasure'].add_item(item["note"])
 
 # Make a new player object that is currently in the 'outside' room.
 user_name = input("Name your player:")
@@ -58,13 +58,30 @@ while True:
     print(f"{player.current_room}")
     # * Prints the current description (the textwrap module might be useful here).
     # * Waits for user input and decides what to do.
-    #standardize the input that is coming in - strip whitespace, lowercase it, and
-    answer = input("Choose a direction to move (n, s, e, w):").strip().lower().split()[0]
-    answer = answer[0]
-    print(answer)
-    if answer in possible_directions:
+    if len(player.current_room.item) > 0:
+        pick_up = input("").strip().lower().split()[0]
+        if pick_up == 'y':
+            player.get_item(player.current_room.item)
+            player.current_room.remove_from_room()
+
+        elif pick_up == 'n':
+            print("Choose a direction to move (n, s, e, w) or q for quit:")
+            answer = input("").strip().lower().split()[0]
+            if answer in possible_directions:
+                player.try_direction(answer)
+
+    else:
+        print("Choose a direction to move (n, s, e, w) or q for quit:")
+        answer = input("").strip().lower().split()[0]
+        answer = answer[0]
+        print(answer)
+
+                #standardize the input that is coming in - strip whitespace, lowercase it, and
+
+
+        if answer in possible_directions:
         # If the user enters a cardinal direction, attempt to move to the room there.
-        player.try_direction(answer)
+            player.try_direction(answer)
 
 
         #player.current_room.get_item(thing)

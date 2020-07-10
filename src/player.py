@@ -21,8 +21,9 @@ class Player:
             # Print an error message if the movement isn't allowed.
             print("Sorry, you can't go that way")
 
-    #def get_item(self, item):
-       # self.item.append(item)
+    def get_item(self, item):
+        self.item.append(item)
+        print(f"You just added {self.item} to your inventory. Use it wisely!")
 
     #def drop_item(self, item):
         #self.item.remove(item)

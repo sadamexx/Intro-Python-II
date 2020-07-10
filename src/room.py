@@ -15,9 +15,12 @@ class Room:
             str += f"\n You see a {x}"
 
         if len(self.item) > 0:
-            str += f"\n Would you like to pick up this item? ("
+            str += f"\n Would you like to pick up this item? (y/n)"
         return str
 
+
+    def remove_from_room(self):
+        self.item= []
 
     def add_item(self, item):
         self.item.append(item)
